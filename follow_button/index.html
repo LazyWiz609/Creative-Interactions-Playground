@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnetic Button Effect</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    .button {
+      padding: 20px 40px;
+      font-size: 20px;
+      background: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.1s ease-out;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+<button class="button" id="button">Magnetic Button</button>
+
+<script>
+  const button = document.getElementById("button"); // Get the button element
+
+  window.addEventListener("mousemove", (e) => {
+    const buttonRect = button.getBoundingClientRect(); // Get the button's bounding rectangle
+    const buttonCenterX = buttonRect.left + buttonRect.width / 2; // Calculate the center of the button
+    const buttonCenterY = buttonRect.top + buttonRect.height / 2; // Calculate the center of the button
+
+    const distanceX = e.clientX - buttonCenterX; // Calculate the distance between the cursor and the center of the button
+    const distanceY = e.clientY - buttonCenterY;
+
+    // const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // Calculate the distance
+    // const maxDistance = 100; // How far the button can move from its original position
+
+    // Calculate movement based on the distance and apply a magnetic pull
+    // const pullDistance = Math.min(distance / 10, maxDistance);
+
+    // Apply the magnetic effect
+    button.style.transform = `translate(${distanceX / 10}px, ${distanceY / 10}px) scale(1.1)`;
+  });
+
+  button.addEventListener("mouseleave", () => {
+    button.style.transform = "translate(0, 0) scale(1)";
+  });
+</script>
+
+</body>
+</html>

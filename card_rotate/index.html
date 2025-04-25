@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tilt Effect</title>
+  <style>
+    .card {
+      width: 300px;
+      height: 400px;
+      background: #6c63ff;
+      border-radius: 15px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.1s ease-out;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card" id="card"></div>
+
+<script>
+  const card = document.getElementById("card");
+
+  card.addEventListener("mousemove", (e) => {
+    const { width, height, left, top } = card.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    
+    const distanceX = (e.clientX - centerX) / (width / 2); // Normalize to range -1 to 1
+    const distanceY = (e.clientY - centerY) / (height / 2); // Normalize to range -1 to 1
+
+    // Apply the tilt effect
+    card.style.transform = `rotateX(${-distanceY * 10}deg) rotateY(${distanceX * 10}deg)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    // Reset rotation on mouse leave
+    card.style.transform = "rotateX(0) rotateY(0)";
+  });
+</script>
+
+</body>
+</html>

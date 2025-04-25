@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    background: #111;
+    overflow: hidden;
+    cursor: none;
+  }
+  
+  .trail {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+  }
+  
