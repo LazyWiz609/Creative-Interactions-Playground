@@ -1,0 +1,15 @@
+.gradient-text {
+    font-size: 60px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6f61, #6b5b95, #88b04b);
+    background-size: 200% 200%;
+    color: transparent;
+    background-clip: text;
+    transition: color 0.5s ease, background-position 0.5s ease;
+  }
+  
+  .gradient-text:hover {
+    color: transparent; /* Keep the text transparent */
+    background-position: 100% 100%; /* Animate the gradient to reveal */
+  }
+  
