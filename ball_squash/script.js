@@ -7,18 +7,19 @@ document.addEventListener('mousedown', (e) => {
     ball.classList.add('ball');
     document.body.appendChild(ball);
 
+    ball.style.position = 'absolute';
     ball.style.left = `${x}px`;
     ball.style.top = `${y}px`;
 
     let posY = y;
     let velocity = 0;
-    let gravity = 1; // gravity acceleration
-    let bounceFactor = 0.7; // lose 30% height each bounce
+    let gravity = 0.8; // gravity acceleration
+    let bounceFactor = 0.8; // lose 30% height each bounce
     let bounces = 0;
-    let maxBounces = 10;
+    let maxBounces = 20;
 
     let squash = false;
-    let ground = window.innerHeight - 15; // considering ball radius
+    let ground = window.innerHeight; // considering ball radius
 
     function animate() {
       velocity += gravity;
@@ -37,13 +38,16 @@ document.addEventListener('mousedown', (e) => {
         squash = false;
         setTimeout(() => {
           ball.style.transform = `translate(-50%, -50%) scale(1, 1)`;
-        }, 100);
+        }, 200);
       } else if (velocity < 0) {
         // Stretch when moving upwards
         ball.style.transform = `translate(-50%, -50%) scale(0.7, 1.3)`;
-      } else {
+      } else if (12 > velocity > 0) {
         // Normal during falling
         ball.style.transform = `translate(-50%, -50%) scale(1, 1)`;
+      } else{
+        // Stretch when moving downwards
+        ball.style.transform = `translate(-50%, -50%) scale(0.7, 1.3)`;
       }
 
       ball.style.top = `${posY}px`;
