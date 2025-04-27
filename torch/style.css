@@ -1,0 +1,36 @@
+body{
+    background-color: #040404;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+h1{
+    font-size: 140px;
+    color: #fff;
+    z-index: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+.cursor {
+    width: 30px;
+    height: 30px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6), 0 0 100px rgba(255, 255, 255, 0.4);
+    position: absolute;
+    pointer-events: none;
+    transition: background-image 0.2s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    pointer-events: none;
+    z-index: 0;
+}
