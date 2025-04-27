@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    height: 100vh;
+    overflow: hidden;
+    background: #222;
+    position: relative;
+  }
+  .ball {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #ff6b6b, #ff4757);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
