@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Square</title>
+</head>
+<body style="background-color: black;">
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let posX = 50;
+        let posY = 100;
+        let speedX = 3;
+        let speedY = 3;
+        const size = 50;
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(posX, posY, size, size);
+
+            // Move
+            posX += speedX;
+            posY += speedY;
+
+            // Bounce
+            if (posX + size > canvas.width || posX < 0) {
+                speedX = -speedX;
+            }
+            if (posY + size > canvas.height || posY < 0) {
+                speedY = -speedY;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

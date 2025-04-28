@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spawn Bouncing Balls</title>
+  <style>
+    body { background: #111; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    canvas { background: white; }
+  </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="600"></canvas>
+
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const gravity = 0.5;
+  const bounceLoss = 0.7;
+
+  const balls = []; // Array to store all balls!
+
+  canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect(); // To get accurate mouse position
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Create a new ball at mouse click
+    const ball = {
+      x: x,
+      y: y,
+      radius: 20,
+      color: getRandomColor(),
+      velocityY: 0,
+      bounceCount: 0 // To count number of bounces
+    };
+
+    balls.push(ball); // Add to balls array
+  });
+
+  function getRandomColor() {
+    const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink"];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Update all balls
+    for (let i = 0; i < balls.length; i++) {
+      const ball = balls[i];
+
+      // Draw Ball
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = ball.color;
+      ctx.fill();
+      ctx.closePath();
+
+      // Physics
+      ball.velocityY += gravity;
+      ball.y += ball.velocityY;
+
+      // Bounce
+      if (ball.y + ball.radius > canvas.height) {
+        ball.y = canvas.height - ball.radius;
+        ball.velocityY = -ball.velocityY * bounceLoss;
+        ball.bounceCount++;
+      }
+
+      // Remove ball if it has bounced many times and moving very slow
+      if (ball.bounceCount > 10 && Math.abs(ball.velocityY) < 2) {
+        balls.splice(i, 1);
+        i--; // Adjust the index after removal
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate(); // Start animation
+</script>
+
+</body>
+</html>

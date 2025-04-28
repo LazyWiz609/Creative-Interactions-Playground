@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Shapes</title>
+  <style>
+    body { background: #111; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    canvas { background: white; }
+  </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="600"></canvas>
+
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Blue filled rectangle
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(100, 100, 150, 100);
+
+  // Red stroked rectangle
+  ctx.strokeStyle = 'red';
+  ctx.strokeRect(300, 100, 150, 100);
+
+  // Green circle
+  ctx.beginPath();
+  ctx.arc(200, 300, 50, 0, 2 * Math.PI);
+  ctx.fillStyle = 'green';
+  ctx.fill();
+  ctx.closePath();
+
+  // Purple line
+  ctx.beginPath();
+  ctx.moveTo(400, 400);
+  ctx.lineTo(600, 500);
+  ctx.strokeStyle = 'purple';
+  ctx.stroke();
+  ctx.closePath();
+
+  // LazyWiz text
+  ctx.fillStyle = 'black';
+  ctx.font = '40px Arial';
+  ctx.fillText('LazyWiz', 320, 550);
+</script>
+
+</body>
+</html>

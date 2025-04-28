@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bouncing Ball</title>
+  <style>
+    body { background: #111; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    canvas { background: white; }
+  </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="600"></canvas>
+
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const gravity = 0.5; // Gravity force
+  const bounceLoss = 0.7; // How much energy is lost on bounce
+
+  let ball = {
+    x: 400,
+    y: 100,
+    radius: 20,
+    color: "red",
+    velocityY: 0
+  };
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw Ball
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fillStyle = ball.color;
+    ctx.fill();
+    ctx.closePath();
+
+    // Update Ball Position
+    ball.velocityY += gravity;   // Gravity pulls down
+    ball.y += ball.velocityY;    // Move ball
+
+    // Bounce off the bottom
+    if (ball.y + ball.radius > canvas.height) {
+      ball.y = canvas.height - ball.radius; // Reset to bottom
+      ball.velocityY = -ball.velocityY * bounceLoss; // Reverse and reduce velocity
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();  // Start animation
+</script>
+
+</body>
+</html>
